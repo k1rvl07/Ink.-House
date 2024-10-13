@@ -52,7 +52,7 @@
         }
         @include respond-to(big-tablet) {
             padding-top: 0;
-            padding-left: 60px;
+            margin-left: 60px;
         }
     }
     .menu {
@@ -90,10 +90,10 @@
             }
             @include respond-to(big-tablet) {
                 padding-top: 0;
-                padding-left: 100px;
+                margin-left: 100px;
             }
             @include respond-to(desktop) {
-                padding-left: 495px;
+                margin-left: 495px;
             }
             .nav__list {
                 @include respond-to(tablet) {

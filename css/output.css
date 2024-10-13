@@ -242,7 +242,7 @@ body {
 @media only screen and (min-width: 690px) {
   .header__shop {
     padding-top: 0;
-    padding-left: 60px;
+    margin-left: 60px;
   }
 }
 .header .menu {
@@ -280,12 +280,12 @@ body {
 @media only screen and (min-width: 690px) {
   .header .nav:nth-child(3) {
     padding-top: 0;
-    padding-left: 100px;
+    margin-left: 100px;
   }
 }
 @media only screen and (min-width: 1110px) {
   .header .nav:nth-child(3) {
-    padding-left: 495px;
+    margin-left: 495px;
   }
 }
 @media only screen and (min-width: 510px) {
