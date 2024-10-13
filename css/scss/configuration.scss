@@ -1,0 +1,398 @@
+// Переменные, мапы и списки
+
+$colors-map: (
+  "black": #2c2d35,
+  "white": #f4f6f5,
+  "light-grey": #e1ede6,
+  "grey": #c3d1c6,
+  "dark-grey": #86928b,
+  "light-green": #d4e8d9,
+  "green": #598d66,
+  "dark-green": #376b44,
+  "light-yellow": #faeb97,
+  "yellow": #eedb6d,
+  "dark-yellow": #d9b949
+);
+
+@function color($color-name) {
+  @return map-get($colors-map, $color-name);
+}
+
+$font-weights-map: (
+  "thin": 100,
+  "extra-light": 200,
+  "light": 300,
+  "regular": 400,
+  "medium": 500,
+  "semi-bold": 600,
+  "bold": 700,
+  "extra-bold": 800,
+  "black": 900,
+  "extra-black": 1000
+);
+
+@function font-weight($weight-name) {
+  @return map-get($font-weights-map, $weight-name);
+}
+
+$text-list: ();
+
+$link-list: (nav-link medium normal color("black") color("green") color("dark-green") 18px 18px 18px 20px,);
+
+// Сложные миксины
+
+$breakpoints: (
+  tablet: 510px,
+  big-tablet: 690px,
+  desktop: 1110px
+);
+
+@mixin respond-to($media) {
+  @if map-has-key($breakpoints, $media) {
+    @media only screen and (min-width: map-get($breakpoints, $media)) {
+      @content;
+    }
+  } @else {
+    @warn "'#{ $media }' is not a valid media query. Available breakpoints: #{map-keys($breakpoints)}";
+  }
+}
+
+@mixin size($type, $width, $height: $width) {
+  @if $type == min {
+    min-width: $width;
+    @if $height != 0px {
+      min-height: $height;
+    }
+  } @else if $type == max {
+    max-width: $width;
+    @if $height != 0px {
+      max-height: $height;
+    }
+  } @else if $type == default {
+    width: $width;
+    @if $height != 0px {
+      height: $height;
+    }
+  }
+}
+
+@mixin flex(
+  $flex: on,
+  $direction: null,
+  $justify: null,
+  $align-content: null,
+  $align-items: null,
+  $wrap: null,
+  $gap: null
+) {
+  @if $flex == on {
+    display: flex;
+  }
+
+  @if $direction != null {
+    flex-direction: $direction;
+  }
+
+  @if $justify != null {
+    justify-content: $justify;
+  }
+
+  @if $align-content != null {
+    align-content: $align-content;
+  }
+
+  @if $align-items != null {
+    align-items: $align-items;
+  }
+
+  @if $wrap != null {
+    flex-wrap: $wrap;
+  }
+
+  @if $gap != null {
+    gap: $gap;
+  }
+}
+
+@mixin flex-item($align-self: null, $flex-grow: null, $flex-shrink: null, $flex-basis: null, $order: null) {
+  @if $align-self != null {
+    align-self: $align-self;
+  }
+
+  @if $flex-grow != null {
+    flex-grow: $flex-grow;
+  }
+
+  @if $flex-shrink != null {
+    flex-shrink: $flex-shrink;
+  }
+
+  @if $flex-basis != null {
+    flex-basis: $flex-basis;
+  }
+
+  @if $order != null {
+    order: $order;
+  }
+}
+
+@mixin grid-setup(
+  $on: null,
+  $rows: null,
+  $columns: null,
+  $areas: null,
+  $row-gap: null,
+  $column-gap: null,
+  $justify-items: null,
+  $align-items: null,
+  $justify-content: null,
+  $align-content: null
+) {
+  @include grid-template($on, $rows, $columns, $areas, $row-gap, $column-gap);
+  @include grid-alignment($justify-items, $align-items, $justify-content, $align-content);
+}
+
+@mixin grid-template($on: null, $rows: null, $columns: null, $areas: null, $row-gap: null, $column-gap: null) {
+  @if $on == on {
+    display: grid;
+  }
+  @if $rows != null {
+    grid-template-rows: $rows;
+  }
+  @if $columns != null {
+    grid-template-columns: $columns;
+  }
+  @if $areas != null {
+    grid-template-areas: $areas;
+  }
+  @if $row-gap != null {
+    row-gap: $row-gap;
+  }
+  @if $column-gap != null {
+    column-gap: $column-gap;
+  }
+}
+
+@mixin grid-alignment($justify-items: null, $align-items: null, $justify-content: null, $align-content: null) {
+  @if $justify-items != null {
+    justify-items: $justify-items;
+  }
+  @if $align-items != null {
+    align-items: $align-items;
+  }
+  @if $justify-content != null {
+    justify-content: $justify-content;
+  }
+  @if $align-content != null {
+    align-content: $align-content;
+  }
+}
+
+@mixin grid-item-alignment($justify-self: null, $align-self: null) {
+  @if $justify-self != null {
+    justify-self: $justify-self;
+  }
+
+  @if $align-self != null {
+    align-self: $align-self;
+  }
+}
+
+@mixin axis-indent($type, $axis, $value, $yvalue: null) {
+  @if $axis == x {
+    #{$type}-left: $value;
+    #{$type}-right: $value;
+  } @else if $axis == y {
+    #{$type}-top: $value;
+    #{$type}-bottom: $value;
+  } @else if $axis == xy {
+    #{$type}-left: $value;
+    #{$type}-right: $value;
+    @if $yvalue != null {
+      #{$type}-top: $yvalue;
+      #{$type}-bottom: $yvalue;
+    }
+  } @else {
+    @warn "'#{ $axis }' is not a valid axis.";
+  }
+}
+
+@mixin border-radius($top-left: null, $top-right: null, $bottom-right: null, $bottom-left: null) {
+  @if $top-left != null and $top-right != null and $bottom-right != null and $bottom-left != null {
+    border-radius: $top-left $top-right $bottom-right $bottom-left;
+  } @else if $top-left != null {
+    @if type-of($top-left) == number and unit($top-left) != "" {
+      border-radius: $top-left;
+    }
+  }
+}
+
+@mixin border($sides: null, $width: null, $style: null, $color: null, $radiuses...) {
+  @if $sides == all {
+    @if $width != null {
+      border-width: $width;
+    }
+    @if $style != null {
+      border-style: $style;
+    }
+    @if $color != null {
+      border-color: $color;
+    }
+  } @else {
+    @each $side in $sides {
+      @if $width != null {
+        border-#{$side}-width: $width;
+      }
+      @if $style != null {
+        border-#{$side}-style: $style;
+      }
+      @if $color != null {
+        border-#{$side}-color: $color;
+      }
+    }
+  }
+  @if length($radiuses) > 0 {
+    @include border-radius($radiuses...);
+  }
+}
+
+// Простые миксины
+
+// Сложные шаблоны
+
+// @each $item in $text-list {
+//   $name: nth($item, 1);
+//   $font-weight: nth($item, 2);
+//   $font-style: nth($item, 3);
+//   $color: nth($item, 4);
+//   $font-size: nth($item, 5);
+//   $tablet-font-size: nth($item, 6);
+//   $big-tablet-font-size: nth($item, 7);
+//   $desktop-font-size: nth($item, 8);
+
+//   %#{$name} {
+//     font-family: $font;
+//     font-weight: font-weight($font-weight);
+//     font-style: $font-style;
+//     font-size: $font-size;
+//     color: $color;
+//     @if $font-size != $tablet-font-size {
+//       @include respond-to(tablet) {
+//         font-size: $tablet-font-size;
+//       }
+//     }
+//     @if $tablet-font-size != $big-tablet-font-size {
+//       @include respond-to(big-tablet) {
+//         font-size: $big-tablet-font-size;
+//       }
+//     }
+//     @if $big-tablet-font-size != $desktop-font-size {
+//       @include respond-to(desktop) {
+//         font-size: $desktop-font-size;
+//       }
+//     }
+//   }
+// }
+
+@each $item in $link-list {
+  $name: nth($item, 1);
+  $font-weight: nth($item, 2);
+  $font-style: nth($item, 3);
+  $color: nth($item, 4);
+  $hover-color: nth($item, 5);
+  $active-color: nth($item, 6);
+  $font-size: nth($item, 7);
+  $tablet-font-size: nth($item, 8);
+  $big-tablet-font-size: nth($item, 9);
+  $desktop-font-size: nth($item, 10);
+
+  %#{$name} {
+    @extend %simple-transition;
+    font-weight: font-weight($font-weight);
+    font-style: $font-style;
+    color: $color;
+    font-size: $font-size;
+    &:hover {
+      color: $hover-color;
+    }
+    &:active {
+      color: $active-color;
+    }
+    @if $font-size != $tablet-font-size {
+      @include respond-to(tablet) {
+        font-size: $tablet-font-size;
+      }
+    }
+    @if $tablet-font-size != $big-tablet-font-size {
+      @include respond-to(big-tablet) {
+        font-size: $big-tablet-font-size;
+      }
+    }
+    @if $big-tablet-font-size != $desktop-font-size {
+      @include respond-to(desktop) {
+        font-size: $desktop-font-size;
+      }
+    }
+  }
+}
+
+// Простые шаблоны
+
+%container {
+  width: 290px;
+  margin: 0 auto;
+  @include respond-to(tablet) {
+    width: 510px;
+  }
+  @include respond-to(big-tablet) {
+    width: 690px;
+  }
+  @include respond-to(desktop) {
+    width: 1110px;
+  }
+}
+
+%simple-transition {
+  transition: 0.3s;
+  &:hover {
+    transition: 0.3s;
+  }
+  &:active {
+    transition: 0.05s;
+  }
+}
+
+%simple-scale {
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+%slider {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  @include respond-to("desktop") {
+    overflow-x: hidden;
+  }
+}
+
+%slides {
+  transition: transform 0.5s ease-in-out;
+}
+
+%slide {
+  scroll-snap-align: start;
+  position: relative;
+}
+
+%icon-btn {
+  @extend %simple-transition;
+  color: color("black");
+  &:hover {
+    color: color("green");
+  }
+  &:active {
+    color: color("dark-green");
+  }
+}

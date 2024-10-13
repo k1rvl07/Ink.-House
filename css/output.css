@@ -1,0 +1,296 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+aside,
+nav,
+footer,
+header,
+section,
+main {
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+ul,
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+address {
+  font-style: normal;
+}
+
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button,
+input[type=submit] {
+  display: inline-block;
+  box-shadow: none;
+  background-color: transparent;
+  background: none;
+  cursor: pointer;
+}
+
+input:focus,
+input:active,
+button:focus,
+button:active {
+  outline: none;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+label {
+  cursor: pointer;
+}
+
+legend {
+  display: block;
+}
+
+.header .nav__link {
+  font-weight: 500;
+  font-style: normal;
+  color: #2c2d35;
+  font-size: 18px;
+}
+.header .nav__link:hover {
+  color: #598d66;
+}
+.header .nav__link:active {
+  color: #376b44;
+}
+@media only screen and (min-width: 1110px) {
+  .header .nav__link {
+    font-size: 20px;
+  }
+}
+
+.container {
+  width: 290px;
+  margin: 0 auto;
+}
+@media only screen and (min-width: 510px) {
+  .container {
+    width: 510px;
+  }
+}
+@media only screen and (min-width: 690px) {
+  .container {
+    width: 690px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .container {
+    width: 1110px;
+  }
+}
+
+.header .menu__close-btn, .header__shop-btn, .header__burger-btn, .header .nav__link {
+  transition: 0.3s;
+}
+.header .menu__close-btn:hover, .header__shop-btn:hover, .header__burger-btn:hover, .header .nav__link:hover {
+  transition: 0.3s;
+}
+.header .menu__close-btn:active, .header__shop-btn:active, .header__burger-btn:active, .header .nav__link:active {
+  transition: 0.05s;
+}
+
+.header .menu__close-btn, .header__shop-btn, .header__burger-btn {
+  color: #2c2d35;
+}
+.header .menu__close-btn:hover, .header__shop-btn:hover, .header__burger-btn:hover {
+  color: #598d66;
+}
+.header .menu__close-btn:active, .header__shop-btn:active, .header__burger-btn:active {
+  color: #376b44;
+}
+
+body {
+  font-family: "Raleway";
+}
+
+.header {
+  background-color: #e1ede6;
+}
+.header__container {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  grid-template-columns: repeat(2, auto);
+  grid-template-areas: "logo logo" "burger shop";
+  justify-items: center;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+@media only screen and (min-width: 510px) {
+  .header__container {
+    grid-template-areas: "logo logo" "menu shop";
+  }
+}
+@media only screen and (min-width: 690px) {
+  .header__container {
+    grid-template-rows: auto;
+    grid-template-columns: repeat(3, auto);
+    grid-template-areas: "logo menu shop";
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .header__container {
+    grid-template-areas: "logo menu shop";
+  }
+}
+.header__logo {
+  grid-area: logo;
+  padding-left: calc(50% - 71.5px);
+  padding-right: calc(50% - 71.5px);
+  padding-bottom: 16px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #c3d1c6;
+}
+@media only screen and (min-width: 690px) {
+  .header__logo {
+    padding: 0;
+    border: none;
+    justify-self: start;
+    align-self: center;
+  }
+}
+.header__burger {
+  grid-area: burger;
+  justify-self: start;
+  align-self: center;
+  padding-top: 16px;
+}
+@media only screen and (min-width: 510px) {
+  .header__burger {
+    display: none;
+  }
+}
+.header__burger-icon {
+  width: 22px;
+  height: 22px;
+}
+.header__shop {
+  grid-area: shop;
+  justify-self: end;
+  align-self: center;
+  padding-top: 16px;
+}
+.header__shop-icon {
+  width: 22px;
+  height: 22px;
+}
+@media only screen and (min-width: 690px) {
+  .header__shop {
+    padding-top: 0;
+    padding-left: 60px;
+  }
+}
+.header .menu {
+  display: none;
+  position: absolute;
+  background-color: #e1ede6;
+  top: 84px;
+  width: 100%;
+  height: 100%;
+}
+.header .menu__close-icon {
+  width: 20px;
+  height: 20px;
+}
+.header .nav:nth-child(2) {
+  margin-top: 30px;
+}
+.header .nav:nth-child(2) .nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.header .nav:nth-child(3) {
+  display: none;
+}
+@media only screen and (min-width: 510px) {
+  .header .nav:nth-child(3) {
+    display: block;
+    grid-area: menu;
+    justify-self: start;
+    align-self: center;
+    padding-top: 16px;
+  }
+}
+@media only screen and (min-width: 690px) {
+  .header .nav:nth-child(3) {
+    padding-top: 0;
+    padding-left: 100px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .header .nav:nth-child(3) {
+    padding-left: 495px;
+  }
+}
+@media only screen and (min-width: 510px) {
+  .header .nav:nth-child(3) .nav__list {
+    display: flex;
+    gap: 60px;
+  }
+}

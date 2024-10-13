@@ -1,0 +1,8 @@
+body {
+    background-color: color(white);
+    font-family: "Raleway";
+}
+
+.container {
+    @extend %container;
+}

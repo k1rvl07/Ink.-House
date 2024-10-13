@@ -1,0 +1,10 @@
+// Шрифты
+@import "./fonts.scss";
+// Обнуление дефолтных стилей
+@import "./null.scss";
+// Конфигурация
+@import "./configuration.scss";
+// Общие стили
+@import "./common_styles.scss";
+// Главная страница
+@import "./pages/index.scss";

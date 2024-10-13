@@ -1,0 +1,105 @@
+.header {
+    background-color: color("light-grey");
+    &__container {
+        @include grid-template(on, repeat(2, auto), repeat(2, auto), "logo logo" "burger shop");
+        @include grid-alignment($justify-items: center, $align-items: center);
+        @include axis-indent("padding", y, 16px);
+        @include respond-to(tablet) {
+            @include grid-template($areas: "logo logo" "menu shop");
+        }
+        @include respond-to(big-tablet) {
+            @include grid-template($rows: auto, $columns: repeat(3, auto), $areas: "logo menu shop");
+            @include axis-indent("padding", y, 32px);
+        }
+        @include respond-to(desktop) {
+            @include grid-template($areas: "logo menu shop");
+        }
+    }
+    &__logo {
+        grid-area: logo;
+        @include axis-indent(padding, x, calc(100% / 2 - 143px / 2));
+        padding-bottom: 16px;
+        @include border(bottom, 1px, solid, color("grey"));
+        @include respond-to(big-tablet) {
+            padding: 0;
+            border: none;
+            @include grid-item-alignment(start, center);
+        }
+    }
+    &__burger {
+        grid-area: burger;
+        @include grid-item-alignment(start, center);
+        padding-top: 16px;
+        @include respond-to(tablet) {
+            display: none;
+        }
+        &-btn {
+            @extend %icon-btn;
+        }
+        &-icon {
+            @include size(default, 22px);
+        }
+    }
+    &__shop {
+        grid-area: shop;
+        @include grid-item-alignment(end, center);
+        padding-top: 16px;
+        &-btn {
+            @extend %icon-btn;
+        }
+        &-icon {
+            @include size(default, 22px);
+        }
+        @include respond-to(big-tablet) {
+            padding-top: 0;
+            padding-left: 60px;
+        }
+    }
+    .menu {
+        display: none;
+        position: absolute;
+        background-color: color("light-grey");
+        top: 84px;
+        @include size(default, 100%, 100%);
+        &__close {
+            &-btn {
+                @extend %icon-btn;
+            }
+            &-icon {
+                @include size(default, 20px);
+            }
+        }
+    }
+    .nav {
+        &__link {
+            @extend %nav-link;
+        }
+        &:nth-child(2) {
+            margin-top: 30px;
+            .nav__list {
+                @include flex(on, column, $gap: 50px);
+            }
+        }
+        &:nth-child(3) {
+            display: none;
+            @include respond-to(tablet) {
+                display: block;
+                grid-area: menu;
+                @include grid-item-alignment(start, center);
+                padding-top: 16px;
+            }
+            @include respond-to(big-tablet) {
+                padding-top: 0;
+                padding-left: 100px;
+            }
+            @include respond-to(desktop) {
+                padding-left: 495px;
+            }
+            .nav__list {
+                @include respond-to(tablet) {
+                    @include flex(on, $gap: 60px);
+                }
+            }
+        }
+    }
+}
