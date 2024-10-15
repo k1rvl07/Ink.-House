@@ -3,13 +3,13 @@
     &__container {
         @include grid-template(on, repeat(2, auto), repeat(2, auto), "logo logo" "burger shop");
         @include grid-alignment($justify-items: center, $align-items: center);
-        @include axis-indent("padding", y, 16px);
+        @include spacing(padding, y, 16px);
         @include respond-to(tablet) {
             @include grid-template($areas: "logo logo" "menu shop");
         }
         @include respond-to(big-tablet) {
             @include grid-template($rows: auto, $columns: repeat(3, auto), $areas: "logo menu shop");
-            @include axis-indent("padding", y, 32px);
+            @include spacing("padding", y, 32px);
         }
         @include respond-to(desktop) {
             @include grid-template($areas: "logo menu shop");
@@ -17,11 +17,10 @@
     }
     &__logo {
         grid-area: logo;
-        @include axis-indent(padding, x, calc(100% / 2 - 143px / 2));
-        padding-bottom: 16px;
+        @include spacing(padding, (bottom, x), 16px, calc(100% / 2 - 143px / 2));
         @include border(bottom, 1px, solid, color("grey"));
         @include respond-to(big-tablet) {
-            padding: 0;
+            @include spacing(padding, all, 0);
             border: none;
             @include grid-item-alignment(start, center);
         }
@@ -29,7 +28,7 @@
     &__burger {
         grid-area: burger;
         @include grid-item-alignment(start, center);
-        padding-top: 16px;
+        @include spacing(padding, top, 16px);
         @include respond-to(tablet) {
             display: none;
         }
@@ -43,7 +42,7 @@
     &__shop {
         grid-area: shop;
         @include grid-item-alignment(end, center);
-        padding-top: 16px;
+        @include spacing(padding, top, 16px);
         &-btn {
             @extend %icon-btn;
         }
@@ -51,8 +50,7 @@
             @include size(default, 22px);
         }
         @include respond-to(big-tablet) {
-            padding-top: 0;
-            margin-left: 60px;
+            @include spacing((padding, "margin"), top, 0, left, 60px);
         }
     }
     .menu {
@@ -75,7 +73,7 @@
             @extend %nav-link;
         }
         &:nth-child(2) {
-            margin-top: 30px;
+            @include spacing("margin", top, 30px);
             .nav__list {
                 @include flex(on, column, $gap: 50px);
             }
@@ -86,20 +84,92 @@
                 display: block;
                 grid-area: menu;
                 @include grid-item-alignment(start, center);
-                padding-top: 16px;
+                @include spacing(padding, top, 16px);
             }
             @include respond-to(big-tablet) {
-                padding-top: 0;
-                margin-left: 100px;
+                @include spacing((padding, "margin"), top, 0, left, 100px);
             }
             @include respond-to(desktop) {
-                margin-left: 495px;
+                @include spacing("margin", left, 495px);
             }
             .nav__list {
                 @include respond-to(tablet) {
                     @include flex(on, $gap: 60px);
                 }
             }
+        }
+    }
+}
+
+.main {
+    &__container {
+        @include grid-template(on, repeat(2, auto), repeat(1, auto), "content content");
+        @include grid-alignment($align-items: center, $justify-content: space-between);
+        @include spacing("margin", top, 60px);
+        @include respond-to(tablet) {
+            @include grid-template($areas: "image content");
+            @include spacing("margin", top, 50px);
+        }
+        @include respond-to(big-tablet) {
+            @include spacing("margin", all, 0px);
+        }
+    }
+    &__content {
+        grid-area: content;
+        @include grid-item-alignment(end, center);
+        @include respond-to(tablet) {
+            @include size(default, 285px, 239px);
+        }
+        @include respond-to(big-tablet) {
+            @include size(default, 330px, 308px);
+        }
+        @include respond-to(desktop) {
+            @include size(default, 540px, 331px);
+        }
+    }
+    &__img {
+        grid-area: image;
+        display: none;
+        @include respond-to(tablet) {
+            display: block;
+            @include size(default, 195px, 239px);
+        }
+        @include respond-to(big-tablet) {
+            @include size(default, 330px, 380px);
+        }
+        @include respond-to(desktop) {
+            @include size(default, 540px, 621px);
+        }
+    }
+    &__title {
+        @extend %main-title;
+        &-green {
+            color: color("green");
+        }
+    }
+    &__text {
+        @extend %main-text;
+        @include spacing("margin", (top, bottom), 20px, 40px);
+        @include respond-to(tablet) {
+            @include spacing("margin", y, 10px);
+        }
+        @include respond-to(big-tablet) {
+            @include spacing("margin", (top, bottom), 20px, 40px);
+        }
+        @include respond-to(desktop) {
+            @include spacing("margin", bottom, 60px);
+        }
+    }
+    &__btn {
+        @include spacing("padding", (x, y), 29px, 14.5px);
+        @include respond-to(tablet) {
+            @include spacing("padding", x, 41px);
+        }
+        @include respond-to(big-tablet) {
+            @include spacing("padding", (x, y), 51.5px, 18.5px);
+        }
+        @include respond-to(desktop) {
+            @include spacing("padding", (x, y), 60px, 21px);
         }
     }
 }

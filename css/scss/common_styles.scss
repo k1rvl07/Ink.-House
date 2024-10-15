@@ -6,3 +6,12 @@ body {
 .container {
     @extend %container;
 }
+
+.button {
+    &-green {
+        @include button("green");
+    }
+    &-yellow {
+        @include button("yellow");
+    }
+}

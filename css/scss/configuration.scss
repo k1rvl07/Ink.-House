@@ -35,11 +35,14 @@ $font-weights-map: (
   @return map-get($font-weights-map, $weight-name);
 }
 
-$text-list: ();
+$text-list: (
+  main-title medium normal color("black") 30px 36px 40px 60px,
+  main-text medium normal color("dark-grey") 14px 16px 18px 18px
+);
 
 $link-list: (nav-link medium normal color("black") color("green") color("dark-green") 18px 18px 18px 20px,);
 
-// Сложные миксины
+// Миксины
 
 $breakpoints: (
   tablet: 510px,
@@ -198,22 +201,61 @@ $breakpoints: (
   }
 }
 
-@mixin axis-indent($type, $axis, $value, $yvalue: null) {
-  @if $axis == x {
-    #{$type}-left: $value;
-    #{$type}-right: $value;
-  } @else if $axis == y {
-    #{$type}-top: $value;
-    #{$type}-bottom: $value;
-  } @else if $axis == xy {
-    #{$type}-left: $value;
-    #{$type}-right: $value;
-    @if $yvalue != null {
-      #{$type}-top: $yvalue;
-      #{$type}-bottom: $yvalue;
-    }
+@mixin spacing($types, $sides, $values...) {
+  $types-list: ();
+
+  @if type-of($types) == "list" {
+    $types-list: $types;
   } @else {
-    @warn "'#{ $axis }' is not a valid axis.";
+    $types-list: ($types);
+  }
+
+  $sides-list: ();
+
+  @if type-of($sides) == "list" {
+    $sides-list: $sides;
+  } @else {
+    $sides-list: ($sides);
+  }
+
+  $value-index: 1;
+
+  @each $type in $types-list {
+    @if $type == "margin" or $type == "padding" {
+      @each $side in $sides-list {
+        @if $side == "all" {
+          @if length($values) < $value-index {
+            @error "Not enough values provided for 'all' sides.";
+          }
+          #{$type}: nth($values, $value-index);
+          $value-index: $value-index + 1;
+        } @else if $side == "x" {
+          @if length($values) < $value-index {
+            @error "Not enough values provided for 'x' sides.";
+          }
+          #{$type}-left: nth($values, $value-index);
+          #{$type}-right: nth($values, $value-index);
+          $value-index: $value-index + 1;
+        } @else if $side == "y" {
+          @if length($values) < $value-index {
+            @error "Not enough values provided for 'y' sides.";
+          }
+          #{$type}-top: nth($values, $value-index);
+          #{$type}-bottom: nth($values, $value-index);
+          $value-index: $value-index + 1;
+        } @else if $side == "top" or $side == "bottom" or $side == "left" or $side == "right" {
+          @if length($values) < $value-index {
+            @error "Not enough values provided for '#{$side}' side.";
+          }
+          #{$type}-#{$side}: nth($values, $value-index);
+          $value-index: $value-index + 1;
+        } @else {
+          @error "Invalid side: #{$side}. Use 'top', 'bottom', 'left', 'right', 'x', or 'y'.";
+        }
+      }
+    } @else {
+      @error "Invalid type: #{$type}. Use 'margin' or 'padding'.";
+    }
   }
 }
 
@@ -256,43 +298,77 @@ $breakpoints: (
   }
 }
 
-// Простые миксины
+@mixin button($type) {
+  @extend %simple-transition;
+  background-color: color("white");
+  @include border(all, 1px, solid, color($type));
+  font-size: 18px;
+  @if $type == "green" {
+    color: color("green");
+
+    &:hover {
+      background-color: color("green");
+      color: color("white");
+    }
+
+    &:active {
+      background-color: color("dark-green");
+      color: color("white");
+      border-color: color("dark-green");
+    }
+  } @else if $type == "yellow" {
+    color: color("yellow");
+
+    &:hover {
+      background-color: color("yellow");
+      color: color("white");
+    }
+
+    &:active {
+      background-color: color("dark-yellow");
+      color: color("white");
+      border-color: color("dark-yellow");
+    }
+  }
+  @include respond-to(big-tablet) {
+    font-size: 20px;
+  }
+}
 
 // Сложные шаблоны
 
-// @each $item in $text-list {
-//   $name: nth($item, 1);
-//   $font-weight: nth($item, 2);
-//   $font-style: nth($item, 3);
-//   $color: nth($item, 4);
-//   $font-size: nth($item, 5);
-//   $tablet-font-size: nth($item, 6);
-//   $big-tablet-font-size: nth($item, 7);
-//   $desktop-font-size: nth($item, 8);
+@each $item in $text-list {
+  $name: nth($item, 1);
+  $font-weight: nth($item, 2);
+  $font-style: nth($item, 3);
+  $color: nth($item, 4);
+  $font-size: nth($item, 5);
+  $tablet-font-size: nth($item, 6);
+  $big-tablet-font-size: nth($item, 7);
+  $desktop-font-size: nth($item, 8);
 
-//   %#{$name} {
-//     font-family: $font;
-//     font-weight: font-weight($font-weight);
-//     font-style: $font-style;
-//     font-size: $font-size;
-//     color: $color;
-//     @if $font-size != $tablet-font-size {
-//       @include respond-to(tablet) {
-//         font-size: $tablet-font-size;
-//       }
-//     }
-//     @if $tablet-font-size != $big-tablet-font-size {
-//       @include respond-to(big-tablet) {
-//         font-size: $big-tablet-font-size;
-//       }
-//     }
-//     @if $big-tablet-font-size != $desktop-font-size {
-//       @include respond-to(desktop) {
-//         font-size: $desktop-font-size;
-//       }
-//     }
-//   }
-// }
+  %#{$name} {
+    font-weight: font-weight($font-weight);
+    font-style: $font-style;
+    font-size: $font-size;
+    color: $color;
+    @if $font-size != $tablet-font-size {
+      @include respond-to(tablet) {
+        font-size: $tablet-font-size;
+      }
+    }
+    @if $tablet-font-size != $big-tablet-font-size {
+      @include respond-to(big-tablet) {
+        font-size: $big-tablet-font-size;
+      }
+    }
+    @if $big-tablet-font-size != $desktop-font-size {
+      @include respond-to(desktop) {
+        font-size: $desktop-font-size;
+      }
+    }
+  }
+}
 
 @each $item in $link-list {
   $name: nth($item, 1);
