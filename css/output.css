@@ -159,6 +159,23 @@ legend {
   }
 }
 
+.second-title-white {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 24px;
+  color: #f4f6f5;
+}
+@media only screen and (min-width: 690px) {
+  .second-title-white {
+    font-size: 30px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .second-title-white {
+    font-size: 40px;
+  }
+}
+
 .pictures .card__author {
   font-weight: 500;
   font-style: normal;
@@ -223,7 +240,7 @@ legend {
   font-weight: 500;
   font-style: normal;
   font-size: 18px;
-  color: #eedb6d;
+  color: #2c2d35;
 }
 @media only screen and (min-width: 690px) {
   .button-yellow {
@@ -240,6 +257,18 @@ legend {
 @media only screen and (min-width: 690px) {
   .button-slider {
     font-size: 20px;
+  }
+}
+
+.collection__text {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  color: #f4f6f5;
+}
+@media only screen and (min-width: 690px) {
+  .collection__text {
+    font-size: 18px;
   }
 }
 
@@ -326,10 +355,9 @@ body {
 }
 
 .button-green {
-  background-color: transparent;
   border-width: 1px;
   border-style: solid;
-  border-color: #598d66;
+  background-color: transparent;
 }
 .button-green:hover {
   background-color: #598d66;
@@ -341,18 +369,13 @@ body {
   border-color: #376b44;
 }
 .button-yellow {
-  background-color: transparent;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #eedb6d;
+  background-color: #eedb6d;
 }
 .button-yellow:hover {
-  background-color: #eedb6d;
-  color: #f4f6f5;
+  background-color: #faeb97;
 }
 .button-yellow:active {
   background-color: #d9b949;
-  color: #f4f6f5;
   border-color: #d9b949;
 }
 .button-slider {
@@ -803,5 +826,122 @@ body {
   .pictures .slider__slides {
     display: flex;
     gap: 32px;
+  }
+}
+
+.collection {
+  margin-top: 60px;
+  background-image: url("../images/collection_bg/collection_bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+@media only screen and (min-width: 510px) {
+  .collection {
+    background-image: url("../images/collection_bg/collection_bg_tablet.png");
+  }
+}
+@media only screen and (min-width: 690px) {
+  .collection {
+    background-image: url("../images/collection_bg/collection_bg_big-tablet.png");
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .collection {
+    background-image: url("../images/collection_bg/collection_bg_desktop.png");
+  }
+}
+.collection__container {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: 50px auto;
+  grid-template-areas: "star title" "text text" "button button";
+  column-gap: 20px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+@media only screen and (min-width: 690px) {
+  .collection__container {
+    grid-template-columns: 60px auto;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .collection__container {
+    grid-template-columns: 80px auto;
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+}
+.collection__star {
+  grid-area: star;
+  width: auto;
+  height: 50px;
+}
+@media only screen and (min-width: 690px) {
+  .collection__star {
+    height: 70px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .collection__star {
+    height: 80px;
+  }
+}
+.collection__title {
+  grid-area: title;
+}
+.collection__title-br {
+  display: none;
+}
+@media only screen and (min-width: 690px) {
+  .collection__title-br {
+    display: block;
+  }
+}
+.collection__text {
+  grid-area: text;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+@media only screen and (min-width: 510px) {
+  .collection__text {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+@media only screen and (min-width: 690px) {
+  .collection__text {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .collection__text {
+    margin-top: 20px;
+    margin-bottom: 60px;
+    width: 540px;
+  }
+}
+.collection__button {
+  grid-area: button;
+  width: 290px;
+  height: 50px;
+}
+@media only screen and (min-width: 510px) {
+  .collection__button {
+    width: 190px;
+    height: 50px;
+  }
+}
+@media only screen and (min-width: 690px) {
+  .collection__button {
+    width: 210px;
+    height: 60px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .collection__button {
+    width: 257px;
+    height: 65px;
   }
 }

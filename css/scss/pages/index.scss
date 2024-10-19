@@ -308,3 +308,84 @@
         }
     }
 }
+
+.collection {
+    @include spacing(margin, top, 60px);
+    background-image: url("../images/collection_bg/collection_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    @include respond-to(tablet) {
+        background-image: url("../images/collection_bg/collection_bg_tablet.png");
+    }
+    @include respond-to(big-tablet) {
+        background-image: url("../images/collection_bg/collection_bg_big-tablet.png");
+    }
+    @include respond-to(desktop) {
+        background-image: url("../images/collection_bg/collection_bg_desktop.png");
+    }
+    &__container {
+        @include grid-setup(
+            on,
+            repeat(3, auto),
+            50px auto,
+            "star title" "text text" "button button",
+            $column-gap: 20px
+        );
+        @include spacing("padding", y, 50px);
+        @include respond-to(big-tablet) {
+            @include grid-setup($columns: 60px auto);
+        }
+        @include respond-to(desktop) {
+            @include grid-setup($columns: 80px auto);
+            @include spacing("padding", y, 70px);
+        }
+    }
+    &__star {
+        grid-area: star;
+        @include size(default, auto, 50px);
+        @include respond-to(big-tablet) {
+            @include size(default, null, 70px);
+        }
+        @include respond-to(desktop) {
+            @include size(default, null, 80px);
+        }
+    }
+    &__title {
+        grid-area: title;
+        &-br {
+            display: none;
+            @include respond-to(big-tablet) {
+                display: block;
+            }
+        }
+    }
+    &__text {
+        grid-area: text;
+        @extend %collection-text;
+        @include spacing("margin", (top, bottom), 20px, 30px);
+        @include respond-to(tablet) {
+            @include spacing("margin", y, 20px);
+        }
+        @include respond-to(big-tablet) {
+            @include spacing("margin", y, 30px);
+        }
+        @include respond-to(desktop) {
+            @include spacing("margin", (top, bottom), 20px, 60px);
+            @include size(default, 540px);
+        }
+    }
+    &__button {
+        grid-area: button;
+        @include size(default, 290px, 50px);
+        @include respond-to(tablet) {
+            @include size(default, 190px, 50px);
+        }
+        @include respond-to(big-tablet) {
+            @include size(default, 210px, 60px);
+        }
+        @include respond-to(desktop) {
+            @include size(default, 257px, 65px);
+        }
+    }
+}

@@ -23,6 +23,10 @@ body {
     @extend %second-title;
 }
 
+.second-title-white {
+    @extend %second-title-white;
+}
+
 .slider {
     @extend %slider;
 
