@@ -1,8 +1,8 @@
 // Меню в мобильной версии шапки сайта
 
 document.addEventListener('DOMContentLoaded', function () {
-    const burgerBtn = document.querySelector('.header__burger-btn');
-    const closeBtn = document.querySelector('.menu__close-btn');
+    const burgerBtn = document.querySelector('.header__burger-button');
+    const closeBtn = document.querySelector('.menu__close-button');
     const menu = document.querySelector('.menu');
 
     function toggleMenu() {

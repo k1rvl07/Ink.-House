@@ -303,7 +303,7 @@
         &__slides {
             @include flex(on, $gap: 20px);
             @include respond-to(tablet) {
-                @include flex(on, $gap: 32px);
+                @include flex($gap: 32px);
             }
         }
     }
@@ -317,9 +317,11 @@
     background-position: center;
     @include respond-to(tablet) {
         background-image: url("../images/collection_bg/collection_bg_tablet.png");
+        @include spacing(margin, top, 50px);
     }
     @include respond-to(big-tablet) {
         background-image: url("../images/collection_bg/collection_bg_big-tablet.png");
+        @include spacing(margin, top, 70px);
     }
     @include respond-to(desktop) {
         background-image: url("../images/collection_bg/collection_bg_desktop.png");
@@ -386,6 +388,65 @@
         }
         @include respond-to(desktop) {
             @include size(default, 257px, 65px);
+        }
+    }
+}
+
+.team {
+    @include spacing(margin, top, 60px);
+    @include respond-to(tablet) {
+        @include spacing(margin, top, 50px);
+    }
+    @include respond-to(big-tablet) {
+        @include spacing(margin, top, 70px);
+    }
+    &__container {
+        @include respond-to(desktop) {
+            @include flex(on, $justify: space-between);
+        }
+    }
+    &__main-info {
+        @include respond-to(desktop) {
+            @include spacing(margin, top, 124px);
+            @include size(default, 635px, fit-content);
+        }
+    }
+    &__title {
+        @include spacing("margin", (top, bottom), 30px, 20px);
+        @include respond-to(big-tablet) {
+            @include spacing("margin", (top, bottom), 40px, 30px);
+        }
+        @include respond-to(desktop) {
+            @include spacing("margin", all, 0px);
+        }
+    }
+    &__text {
+        @extend %team-text;
+        @include spacing("margin", bottom, 20px);
+        @include respond-to(big-tablet) {
+            @include spacing("margin", bottom, 30px);
+        }
+        @include respond-to(desktop) {
+            @include spacing("margin", y, 20px);
+        }
+    }
+    &__workers {
+        @include flex(on, $justify: space-between);
+        @include respond-to(tablet) {
+            @include flex($justify: flex-start, $gap: 30px);
+        }
+    }
+    &__img {
+        @include image-fit(cover, center);
+        @include size(default, 290px, 286px);
+        @include respond-to(tablet) {
+            @include size(default, 375px, 370px);
+        }
+        @include respond-to(big-tablet) {
+            @include size(default, 510px, 504px);
+        }
+        @include respond-to(desktop) {
+            @include size(default, 445px, 440px);
         }
     }
 }

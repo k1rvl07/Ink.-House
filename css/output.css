@@ -272,6 +272,18 @@ legend {
   }
 }
 
+.team__text {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  color: #2c2d35;
+}
+@media only screen and (min-width: 690px) {
+  .team__text {
+    font-size: 18px;
+  }
+}
+
 .header .nav__link {
   font-weight: 500;
   font-style: normal;
@@ -839,11 +851,13 @@ body {
 @media only screen and (min-width: 510px) {
   .collection {
     background-image: url("../images/collection_bg/collection_bg_tablet.png");
+    margin-top: 50px;
   }
 }
 @media only screen and (min-width: 690px) {
   .collection {
     background-image: url("../images/collection_bg/collection_bg_big-tablet.png");
+    margin-top: 70px;
   }
 }
 @media only screen and (min-width: 1110px) {
@@ -943,5 +957,96 @@ body {
   .collection__button {
     width: 257px;
     height: 65px;
+  }
+}
+
+.team {
+  margin-top: 60px;
+}
+@media only screen and (min-width: 510px) {
+  .team {
+    margin-top: 50px;
+  }
+}
+@media only screen and (min-width: 690px) {
+  .team {
+    margin-top: 70px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .team__container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .team__main-info {
+    margin-top: 124px;
+    width: 635px;
+    height: fit-content;
+  }
+}
+.team__title {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+@media only screen and (min-width: 690px) {
+  .team__title {
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .team__title {
+    margin: 0px;
+  }
+}
+.team__text {
+  margin-bottom: 20px;
+}
+@media only screen and (min-width: 690px) {
+  .team__text {
+    margin-bottom: 30px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .team__text {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+.team__workers {
+  display: flex;
+  justify-content: space-between;
+}
+@media only screen and (min-width: 510px) {
+  .team__workers {
+    display: flex;
+    justify-content: flex-start;
+    gap: 30px;
+  }
+}
+.team__img {
+  object-fit: cover;
+  object-position: center;
+  width: 290px;
+  height: 286px;
+}
+@media only screen and (min-width: 510px) {
+  .team__img {
+    width: 375px;
+    height: 370px;
+  }
+}
+@media only screen and (min-width: 690px) {
+  .team__img {
+    width: 510px;
+    height: 504px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .team__img {
+    width: 445px;
+    height: 440px;
   }
 }
