@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: color(white);
     font-family: "Raleway";
@@ -16,6 +20,9 @@ body {
     }
     &-slider {
         @include button("slider");
+    }
+    &-icon {
+        @include button("icon");
     }
 }
 

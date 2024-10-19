@@ -48,10 +48,15 @@ $text-list: (
   yellow-button-text medium normal color("black") 18px 18px 20px 20px,
   slider-button-text medium normal color("black") 18px 18px 20px 20px,
   collection-text medium normal color("white") 16px 16px 18px 18px,
-  team-text medium normal color("black") 16px 16px 18px 18px
+  team-text medium normal color("black") 16px 16px 18px 18px,
+  footer-rights medium normal color("dark-grey") 12px 12px 12px 12px
 );
 
-$link-list: (nav-link medium normal color("black") color("green") color("dark-green") 18px 18px 18px 20px,);
+$link-list: (
+  nav-link medium normal color("black") color("green") color("dark-green") 18px 18px 18px 20px,
+  footer-link medium normal color("black") color("green") color("dark-green") 18px 20px 20px 20px,
+  footer-second-link medium normal color("dark-grey") color("green") color("dark-green") 16px 16px 18px 18px
+);
 
 // Миксины
 
@@ -338,6 +343,14 @@ $breakpoints: (
     &:active {
       background-color: color("dark-green");
     }
+  } @else if $type == "icon" {
+    color: color("black");
+    &:hover {
+      color: color("green");
+    }
+    &:active {
+      color: color("dark-green");
+    }
   }
 }
 
@@ -466,15 +479,4 @@ $breakpoints: (
 %slide {
   scroll-snap-align: start;
   position: relative;
-}
-
-%icon-button {
-  @extend %simple-transition;
-  color: color("black");
-  &:hover {
-    color: color("green");
-  }
-  &:active {
-    color: color("dark-green");
-  }
 }

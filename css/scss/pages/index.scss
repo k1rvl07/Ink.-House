@@ -38,9 +38,6 @@
         @include respond-to(tablet) {
             display: none;
         }
-        &-button {
-            @extend %icon-button;
-        }
         &-icon {
             @include size(default, 22px, 22px);
         }
@@ -49,9 +46,6 @@
         grid-area: shop;
         @include grid-item-alignment(end, center);
         @include spacing(padding, top, 16px);
-        &-button {
-            @extend %icon-button;
-        }
         &-icon {
             @include size(default, 22px, 22px);
         }
@@ -64,11 +58,9 @@
         position: absolute;
         background-color: color("light-grey");
         top: 84px;
-        @include size(default, 100%, 100%);
+        z-index: 999;
+        @include size(default, 100%, 1000%);
         &__close {
-            &-button {
-                @extend %icon-button;
-            }
             &-icon {
                 @include size(default, 20px, 20px);
             }
@@ -447,6 +439,125 @@
         }
         @include respond-to(desktop) {
             @include size(default, 445px, 440px);
+        }
+    }
+}
+
+.footer {
+    background-color: color("light-grey");
+    @include spacing((margin, "padding"), (top, bottom), 60px, null, 20px, 20px);
+    @include respond-to(tablet) {
+        @include spacing((margin, "padding"), (top, bottom), 50px, null, 25px, 25px);
+    }
+    @include respond-to(big-tablet) {
+        @include spacing(margin, top, 70px);
+    }
+    &__container {
+        @include grid-setup(
+            on,
+            repeat(4, auto),
+            160px 114px,
+            "logo logo" "contacts reproductions" "new about" "social social",
+            $row-gap: 20px,
+            $justify-content: space-between
+        );
+        @include respond-to(tablet) {
+            @include grid-setup(
+                $rows: repeat(3, auto),
+                $columns: 143px 84px 108px,
+                $areas: "logo contacts contacts" "reproductions new about" "social social social"
+            );
+        }
+        @include respond-to(big-tablet) {
+            @include grid-setup(
+                $rows: repeat(2, auto),
+                $columns: 130px 84px 108px 245px,
+                $areas: "logo logo . contacts" "reproductions new about social",
+                $row-gap: 30px
+            );
+        }
+        @include respond-to(desktop) {
+            @include grid-setup(
+                $rows: repeat(2, auto),
+                $columns: 225px 130px 84px 108px 320px,
+                $areas: "logo reproductions new about social" "contacts reproductions new about social",
+                $row-gap: 35px
+            );
+        }
+    }
+    &__logo {
+        grid-area: logo;
+        @include respond-to(tablet) {
+            @include spacing(margin, bottom, 10px);
+        }
+        @include respond-to(big-tablet) {
+            @include spacing(margin, bottom, 0px);
+        }
+    }
+    &__link {
+        @extend %footer-link;
+    }
+    &__second-link {
+        @extend %footer-second-link;
+    }
+    &__links {
+        @include flex(on, column, $gap: 6px);
+        &:nth-child(2) {
+            grid-area: contacts;
+            @include respond-to(tablet) {
+                @include grid-item-alignment(end, center);
+                @include spacing(margin, bottom, 10px);
+                @include respond-to(big-tablet) {
+                    @include spacing(margin, bottom, 0px);
+                }
+            }
+            @include respond-to(desktop) {
+                @include grid-item-alignment(start, null);
+            }
+        }
+        &:nth-child(3) {
+            grid-area: reproductions;
+        }
+        &:nth-child(4) {
+            grid-area: new;
+        }
+        &:nth-child(5) {
+            grid-area: about;
+        }
+    }
+    &__social {
+        grid-area: social;
+        @include respond-to(big-tablet) {
+            @include spacing(margin, left, 75px);
+        }
+        @include respond-to(desktop) {
+            @include spacing(margin, left, 0px);
+            @include grid-item-alignment(end, null);
+        }
+        &-icons {
+            @include flex(on, $gap: 30px, $align-items: center, $justify: center);
+            @include spacing(padding, (top, bottom, x), 20px, 10px, calc(100% / 2 - 132px / 2));
+            @include border(top, 1px, solid, color("grey"));
+            @include respond-to(big-tablet) {
+                @include spacing(padding, (top, x), 0, 0);
+                border: none;
+            }
+            @include respond-to(big-tablet) {
+                @include flex($justify: flex-start);
+            }
+        }
+        &-text {
+            @extend %footer-rights;
+            text-align: center;
+            &-br {
+                display: none;
+                @include respond-to(big-tablet) {
+                    display: block;
+                }
+            }
+            @include respond-to(big-tablet) {
+                text-align: left;
+            }
         }
     }
 }

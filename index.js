@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const burgerBtn = document.querySelector('.header__burger-button');
     const closeBtn = document.querySelector('.menu__close-button');
     const menu = document.querySelector('.menu');
+    const navLinks = document.querySelectorAll('.menu .nav__link');
 
     function toggleMenu() {
         if (window.innerWidth > 509) {
@@ -17,6 +18,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     closeBtn.addEventListener('click', function () {
         menu.style.display = 'none';
+    });
+
+    navLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+            menu.style.display = 'none';
+        });
     });
 
     window.addEventListener('resize', toggleMenu);
