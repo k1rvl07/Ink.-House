@@ -142,6 +142,107 @@ legend {
   }
 }
 
+.second-title {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 24px;
+  color: #2c2d35;
+}
+@media only screen and (min-width: 690px) {
+  .second-title {
+    font-size: 30px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .second-title {
+    font-size: 40px;
+  }
+}
+
+.pictures .card__author {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  color: #86928b;
+}
+@media only screen and (min-width: 690px) {
+  .pictures .card__author {
+    font-size: 18px;
+  }
+}
+
+.pictures .card__title {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 24px;
+  color: #2c2d35;
+}
+@media only screen and (min-width: 690px) {
+  .pictures .card__title {
+    font-size: 30px;
+  }
+}
+
+.pictures .card__description {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  color: #2c2d35;
+}
+@media only screen and (min-width: 690px) {
+  .pictures .card__description {
+    font-size: 18px;
+  }
+}
+
+.pictures .card__price {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 20px;
+  color: #598d66;
+}
+@media only screen and (min-width: 690px) {
+  .pictures .card__price {
+    font-size: 24px;
+  }
+}
+
+.button-green {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 18px;
+  color: #598d66;
+}
+@media only screen and (min-width: 690px) {
+  .button-green {
+    font-size: 20px;
+  }
+}
+
+.button-yellow {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 18px;
+  color: #eedb6d;
+}
+@media only screen and (min-width: 690px) {
+  .button-yellow {
+    font-size: 20px;
+  }
+}
+
+.button-slider {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 18px;
+  color: #2c2d35;
+}
+@media only screen and (min-width: 690px) {
+  .button-slider {
+    font-size: 20px;
+  }
+}
+
 .header .nav__link {
   font-weight: 500;
   font-style: normal;
@@ -180,23 +281,43 @@ legend {
   }
 }
 
-.button-yellow, .button-green, .header .menu__close-btn, .header__shop-btn, .header__burger-btn, .header .nav__link {
+.button-slider, .button-yellow, .button-green, .header .menu__close-button, .header__shop-button, .header__burger-button, .header .nav__link {
   transition: 0.3s;
 }
-.button-yellow:hover, .button-green:hover, .header .menu__close-btn:hover, .header__shop-btn:hover, .header__burger-btn:hover, .header .nav__link:hover {
+.button-slider:hover, .button-yellow:hover, .button-green:hover, .header .menu__close-button:hover, .header__shop-button:hover, .header__burger-button:hover, .header .nav__link:hover {
   transition: 0.3s;
 }
-.button-yellow:active, .button-green:active, .header .menu__close-btn:active, .header__shop-btn:active, .header__burger-btn:active, .header .nav__link:active {
+.button-slider:active, .button-yellow:active, .button-green:active, .header .menu__close-button:active, .header__shop-button:active, .header__burger-button:active, .header .nav__link:active {
   transition: 0.05s;
 }
 
-.header .menu__close-btn, .header__shop-btn, .header__burger-btn {
+.slider {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+}
+@media only screen and (min-width: 1110px) {
+  .slider {
+    overflow-x: hidden;
+  }
+}
+
+.slider__slides {
+  transition: transform 0.5s ease-in-out;
+}
+
+.slider__slide {
+  scroll-snap-align: start;
+  position: relative;
+}
+
+.header .menu__close-button, .header__shop-button, .header__burger-button {
   color: #2c2d35;
 }
-.header .menu__close-btn:hover, .header__shop-btn:hover, .header__burger-btn:hover {
+.header .menu__close-button:hover, .header__shop-button:hover, .header__burger-button:hover {
   color: #598d66;
 }
-.header .menu__close-btn:active, .header__shop-btn:active, .header__burger-btn:active {
+.header .menu__close-button:active, .header__shop-button:active, .header__burger-button:active {
   color: #376b44;
 }
 
@@ -205,12 +326,10 @@ body {
 }
 
 .button-green {
-  background-color: #f4f6f5;
+  background-color: transparent;
   border-width: 1px;
   border-style: solid;
   border-color: #598d66;
-  font-size: 18px;
-  color: #598d66;
 }
 .button-green:hover {
   background-color: #598d66;
@@ -221,18 +340,11 @@ body {
   color: #f4f6f5;
   border-color: #376b44;
 }
-@media only screen and (min-width: 690px) {
-  .button-green {
-    font-size: 20px;
-  }
-}
 .button-yellow {
-  background-color: #f4f6f5;
+  background-color: transparent;
   border-width: 1px;
   border-style: solid;
   border-color: #eedb6d;
-  font-size: 18px;
-  color: #eedb6d;
 }
 .button-yellow:hover {
   background-color: #eedb6d;
@@ -243,10 +355,25 @@ body {
   color: #f4f6f5;
   border-color: #d9b949;
 }
-@media only screen and (min-width: 690px) {
-  .button-yellow {
-    font-size: 20px;
-  }
+.button-slider {
+  background-color: #d4e8d9;
+  border-radius: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.button-slider:hover {
+  background-color: #598d66;
+  color: #f4f6f5;
+}
+.button-slider:active {
+  background-color: #376b44;
+}
+
+.slider-button-active {
+  background-color: #376b44;
+  color: #f4f6f5;
 }
 
 .header {
@@ -469,20 +596,20 @@ body {
     margin-bottom: 60px;
   }
 }
-.main__btn {
+.main__button {
   padding-left: 29px;
   padding-right: 29px;
   padding-top: 14.5px;
   padding-bottom: 14.5px;
 }
 @media only screen and (min-width: 510px) {
-  .main__btn {
+  .main__button {
     padding-left: 41px;
     padding-right: 41px;
   }
 }
 @media only screen and (min-width: 690px) {
-  .main__btn {
+  .main__button {
     padding-left: 51.5px;
     padding-right: 51.5px;
     padding-top: 18.5px;
@@ -490,10 +617,191 @@ body {
   }
 }
 @media only screen and (min-width: 1110px) {
-  .main__btn {
+  .main__button {
     padding-left: 60px;
     padding-right: 60px;
     padding-top: 21px;
     padding-bottom: 21px;
+  }
+}
+
+.pictures {
+  margin-top: 60px;
+}
+@media only screen and (min-width: 510px) {
+  .pictures {
+    margin-top: 50px;
+  }
+}
+@media only screen and (min-width: 690px) {
+  .pictures {
+    margin-top: 70px;
+  }
+}
+.pictures__container {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: repeat(2, auto);
+  grid-template-areas: "title title" "slider slider" "cards cards";
+  row-gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+@media only screen and (min-width: 690px) {
+  .pictures__container {
+    grid-template-columns: repeat(2, auto);
+    grid-template-areas: "title slider" "cards cards";
+    row-gap: 30px;
+  }
+}
+.pictures__title {
+  grid-area: title;
+}
+.pictures__cards {
+  grid-area: cards;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto;
+  row-gap: 30px;
+}
+@media only screen and (min-width: 510px) {
+  .pictures__cards {
+    grid-template-columns: repeat(2, auto);
+    column-gap: 30px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .pictures__cards {
+    grid-template-columns: repeat(3, auto);
+  }
+}
+.pictures .card {
+  background-color: #e1ede6;
+  width: 290px;
+  height: fit-content;
+}
+@media only screen and (min-width: 510px) {
+  .pictures .card {
+    width: 240px;
+  }
+}
+@media only screen and (min-width: 690px) {
+  .pictures .card {
+    width: 330px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .pictures .card {
+    width: 350px;
+  }
+}
+.pictures .card__container {
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+.pictures .card__author {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+@media only screen and (min-width: 690px) {
+  .pictures .card__author {
+    margin-top: 20px;
+  }
+}
+.pictures .card__description {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+@media only screen and (min-width: 510px) {
+  .pictures .card__description {
+    margin-bottom: 0px;
+  }
+}
+@media only screen and (min-width: 690px) {
+  .pictures .card__description {
+    margin-top: 8px;
+    margin-bottom: 30px;
+  }
+}
+.pictures .card__price {
+  margin-bottom: 10px;
+}
+@media only screen and (min-width: 690px) {
+  .pictures .card__price {
+    margin-bottom: 20px;
+  }
+}
+.pictures .card__button {
+  white-space: nowrap;
+  padding-left: 81.5px;
+  padding-right: 81.5px;
+  padding-top: 14.5px;
+  padding-bottom: 14.5px;
+}
+@media only screen and (min-width: 510px) {
+  .pictures .card__button {
+    padding-left: 56.5px;
+    padding-right: 56.5px;
+  }
+}
+@media only screen and (min-width: 690px) {
+  .pictures .card__button {
+    padding-left: 96.5px;
+    padding-right: 96.5px;
+    padding-top: 21px;
+    padding-bottom: 21px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .pictures .card__button {
+    padding-left: 106.5px;
+    padding-right: 106.5px;
+  }
+}
+.pictures .card__image {
+  object-fit: cover;
+  object-position: center;
+  width: 250px;
+  height: 250px;
+}
+@media only screen and (min-width: 510px) {
+  .pictures .card__image {
+    width: 200px;
+  }
+}
+@media only screen and (min-width: 690px) {
+  .pictures .card__image {
+    width: 290px;
+    height: 422px;
+  }
+}
+@media only screen and (min-width: 1110px) {
+  .pictures .card__image {
+    width: 310px;
+  }
+}
+.pictures .slider {
+  grid-area: slider;
+}
+@media only screen and (min-width: 510px) {
+  .pictures .slider {
+    overflow-x: hidden;
+  }
+}
+@media only screen and (min-width: 690px) {
+  .pictures .slider {
+    justify-self: end;
+    align-self: center;
+  }
+}
+.pictures .slider__slides {
+  display: flex;
+  gap: 20px;
+}
+@media only screen and (min-width: 510px) {
+  .pictures .slider__slides {
+    display: flex;
+    gap: 32px;
   }
 }

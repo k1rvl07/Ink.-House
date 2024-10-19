@@ -1,18 +1,24 @@
 .header {
     background-color: color("light-grey");
     &__container {
-        @include grid-template(on, repeat(2, auto), repeat(2, auto), "logo logo" "burger shop");
-        @include grid-alignment($justify-items: center, $align-items: center);
+        @include grid-setup(
+            on,
+            repeat(2, auto),
+            repeat(2, auto),
+            "logo logo" "burger shop",
+            $justify-items: center,
+            $align-items: center
+        );
         @include spacing(padding, y, 16px);
         @include respond-to(tablet) {
-            @include grid-template($areas: "logo logo" "menu shop");
+            @include grid-setup($areas: "logo logo" "menu shop");
         }
         @include respond-to(big-tablet) {
-            @include grid-template($rows: auto, $columns: repeat(3, auto), $areas: "logo menu shop");
+            @include grid-setup($rows: auto, $columns: repeat(3, auto), $areas: "logo menu shop");
             @include spacing("padding", y, 32px);
         }
         @include respond-to(desktop) {
-            @include grid-template($areas: "logo menu shop");
+            @include grid-setup($areas: "logo menu shop");
         }
     }
     &__logo {
@@ -32,22 +38,22 @@
         @include respond-to(tablet) {
             display: none;
         }
-        &-btn {
-            @extend %icon-btn;
+        &-button {
+            @extend %icon-button;
         }
         &-icon {
-            @include size(default, 22px);
+            @include size(default, 22px, 22px);
         }
     }
     &__shop {
         grid-area: shop;
         @include grid-item-alignment(end, center);
         @include spacing(padding, top, 16px);
-        &-btn {
-            @extend %icon-btn;
+        &-button {
+            @extend %icon-button;
         }
         &-icon {
-            @include size(default, 22px);
+            @include size(default, 22px, 22px);
         }
         @include respond-to(big-tablet) {
             @include spacing((padding, "margin"), top, 0, left, 60px);
@@ -60,11 +66,11 @@
         top: 84px;
         @include size(default, 100%, 100%);
         &__close {
-            &-btn {
-                @extend %icon-btn;
+            &-button {
+                @extend %icon-button;
             }
             &-icon {
-                @include size(default, 20px);
+                @include size(default, 20px, 20px);
             }
         }
     }
@@ -103,11 +109,17 @@
 
 .main {
     &__container {
-        @include grid-template(on, repeat(2, auto), repeat(1, auto), "content content");
-        @include grid-alignment($align-items: center, $justify-content: space-between);
+        @include grid-setup(
+            on,
+            repeat(2, auto),
+            repeat(1, auto),
+            "content content",
+            $align-items: center,
+            $justify-content: space-between
+        );
         @include spacing("margin", top, 60px);
         @include respond-to(tablet) {
-            @include grid-template($areas: "image content");
+            @include grid-setup($areas: "image content");
             @include spacing("margin", top, 50px);
         }
         @include respond-to(big-tablet) {
@@ -160,7 +172,7 @@
             @include spacing("margin", bottom, 60px);
         }
     }
-    &__btn {
+    &__button {
         @include spacing("padding", (x, y), 29px, 14.5px);
         @include respond-to(tablet) {
             @include spacing("padding", x, 41px);
@@ -170,6 +182,129 @@
         }
         @include respond-to(desktop) {
             @include spacing("padding", (x, y), 60px, 21px);
+        }
+    }
+}
+
+.pictures {
+    @include spacing(margin, top, 60px);
+    @include respond-to(tablet) {
+        @include spacing(margin, top, 50px);
+    }
+    @include respond-to(big-tablet) {
+        @include spacing(margin, top, 70px);
+    }
+    &__container {
+        @include grid-setup(
+            on,
+            repeat(3, auto),
+            repeat(2, auto),
+            "title title" "slider slider" "cards cards",
+            $row-gap: 20px,
+            $justify-content: space-between,
+            $align-items: center
+        );
+        @include respond-to(big-tablet) {
+            @include grid-setup($columns: repeat(2, auto), $areas: "title slider" "cards cards", $row-gap: 30px);
+        }
+    }
+    &__title {
+        grid-area: title;
+    }
+    &__cards {
+        grid-area: cards;
+        @include grid-setup(on, auto, auto, $row-gap: 30px);
+        @include respond-to(tablet) {
+            @include grid-setup($columns: repeat(2, auto), $column-gap: 30px);
+        }
+        @include respond-to(desktop) {
+            @include grid-setup($columns: repeat(3, auto));
+        }
+    }
+    .card {
+        background-color: color("light-grey");
+        @include size(default, 290px, fit-content);
+        @include respond-to(tablet) {
+            @include size(default, 240px);
+        }
+        @include respond-to(big-tablet) {
+            @include size(default, 330px);
+        }
+        @include respond-to(desktop) {
+            @include size(default, 350px);
+        }
+        &__container {
+            @include spacing(padding, all, 20px);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        &__author {
+            @extend %card-author;
+            @include spacing("margin", (top, bottom), 15px, 10px);
+            @include respond-to(big-tablet) {
+                @include spacing(margin, top, 20px);
+            }
+        }
+        &__title {
+            @extend %card-title;
+        }
+        &__description {
+            @extend %card-description;
+            @include spacing("margin", (top, bottom), 10px, 30px);
+            @include respond-to(tablet) {
+                @include spacing(margin, bottom, 0px);
+            }
+            @include respond-to(big-tablet) {
+                @include spacing(margin, (top, bottom), 8px, 30px);
+            }
+        }
+        &__price {
+            @extend %card-price;
+            @include spacing("margin", bottom, 10px);
+            @include respond-to(big-tablet) {
+                @include spacing(margin, bottom, 20px);
+            }
+        }
+        &__button {
+            white-space: nowrap;
+            @include spacing(padding, (x, y), 81.5px, 14.5px);
+            @include respond-to(tablet) {
+                @include spacing("padding", x, 56.5px);
+            }
+            @include respond-to(big-tablet) {
+                @include spacing("padding", (x, y), 96.5px, 21px);
+            }
+            @include respond-to(desktop) {
+                @include spacing("padding", x, 106.5px);
+            }
+        }
+        &__image {
+            @include image-fit(cover, center);
+            @include size(default, 250px, 250px);
+            @include respond-to(tablet) {
+                @include size(default, 200px);
+            }
+            @include respond-to(big-tablet) {
+                @include size(default, 290px, 422px);
+            }
+            @include respond-to(desktop) {
+                @include size(default, 310px);
+            }
+        }
+    }
+    .slider {
+        grid-area: slider;
+        @include respond-to(tablet) {
+            overflow-x: hidden;
+        }
+        @include respond-to(big-tablet) {
+            @include grid-item-alignment(end, center);
+        }
+        &__slides {
+            @include flex(on, $gap: 20px);
+            @include respond-to(tablet) {
+                @include flex(on, $gap: 32px);
+            }
         }
     }
 }

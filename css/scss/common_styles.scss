@@ -14,4 +14,28 @@ body {
     &-yellow {
         @include button("yellow");
     }
+    &-slider {
+        @include button("slider");
+    }
+}
+
+.second-title {
+    @extend %second-title;
+}
+
+.slider {
+    @extend %slider;
+
+    &__slides {
+        @extend %slides;
+    }
+
+    &__slide {
+        @extend %slide;
+    }
+}
+
+.slider-button-active {
+    background-color: #376b44;
+    color: #f4f6f5;
 }

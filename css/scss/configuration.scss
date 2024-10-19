@@ -37,7 +37,15 @@ $font-weights-map: (
 
 $text-list: (
   main-title medium normal color("black") 30px 36px 40px 60px,
-  main-text medium normal color("dark-grey") 14px 16px 18px 18px
+  main-text medium normal color("dark-grey") 14px 16px 18px 18px,
+  second-title medium normal color("black") 24px 24px 30px 40px,
+  card-author medium normal color("dark-grey") 16px 16px 18px 18px,
+  card-title medium normal color("black") 24px 24px 30px 30px,
+  card-description medium normal color("black") 16px 16px 18px 18px,
+  card-price medium normal color("green") 20px 20px 24px 24px,
+  green-button-text medium normal color("green") 18px 18px 20px 20px,
+  yellow-button-text medium normal color("yellow") 18px 18px 20px 20px,
+  slider-button-text medium normal color("black") 18px 18px 20px 20px
 );
 
 $link-list: (nav-link medium normal color("black") color("green") color("dark-green") 18px 18px 18px 20px,);
@@ -60,21 +68,31 @@ $breakpoints: (
   }
 }
 
-@mixin size($type, $width, $height: $width) {
-  @if $type == min {
-    min-width: $width;
-    @if $height != 0px {
-      min-height: $height;
-    }
-  } @else if $type == max {
-    max-width: $width;
-    @if $height != 0px {
-      max-height: $height;
-    }
-  } @else if $type == default {
-    width: $width;
-    @if $height != 0px {
+@mixin size($types, $values...) {
+  $types-list: if(type-of($types) == "list", $types, ($types));
+  $value-index: 1;
+
+  @each $type in $types-list {
+    @if $type == "default" {
+      $width: if(length($values) >= $value-index, nth($values, $value-index), null);
+      $height: if(length($values) >= $value-index + 1, nth($values, $value-index + 1), null);
+      width: $width;
       height: $height;
+      $value-index: $value-index + 2;
+    } @else if $type == "min" {
+      $min-width: if(length($values) >= $value-index, nth($values, $value-index), null);
+      $min-height: if(length($values) >= $value-index + 1, nth($values, $value-index + 1), null);
+      min-width: $min-width;
+      min-height: $min-height;
+      $value-index: $value-index + 2;
+    } @else if $type == "max" {
+      $max-width: if(length($values) >= $value-index, nth($values, $value-index), null);
+      $max-height: if(length($values) >= $value-index + 1, nth($values, $value-index + 1), null);
+      max-width: $max-width;
+      max-height: $max-height;
+      $value-index: $value-index + 2;
+    } @else {
+      @error "Invalid size type: #{$type}. Use 'default', 'min', or 'max'.";
     }
   }
 }
@@ -202,56 +220,33 @@ $breakpoints: (
 }
 
 @mixin spacing($types, $sides, $values...) {
-  $types-list: ();
-
-  @if type-of($types) == "list" {
-    $types-list: $types;
-  } @else {
-    $types-list: ($types);
-  }
-
-  $sides-list: ();
-
-  @if type-of($sides) == "list" {
-    $sides-list: $sides;
-  } @else {
-    $sides-list: ($sides);
-  }
+  $types-list: if(type-of($types) == "list", $types, ($types));
+  $sides-list: if(type-of($sides) == "list", $sides, ($sides));
 
   $value-index: 1;
 
   @each $type in $types-list {
     @if $type == "margin" or $type == "padding" {
       @each $side in $sides-list {
+        @if length($values) < $value-index {
+          @error "Not enough values provided for '#{$side}' side.";
+        }
+
         @if $side == "all" {
-          @if length($values) < $value-index {
-            @error "Not enough values provided for 'all' sides.";
-          }
           #{$type}: nth($values, $value-index);
-          $value-index: $value-index + 1;
         } @else if $side == "x" {
-          @if length($values) < $value-index {
-            @error "Not enough values provided for 'x' sides.";
-          }
           #{$type}-left: nth($values, $value-index);
           #{$type}-right: nth($values, $value-index);
-          $value-index: $value-index + 1;
         } @else if $side == "y" {
-          @if length($values) < $value-index {
-            @error "Not enough values provided for 'y' sides.";
-          }
           #{$type}-top: nth($values, $value-index);
           #{$type}-bottom: nth($values, $value-index);
-          $value-index: $value-index + 1;
-        } @else if $side == "top" or $side == "bottom" or $side == "left" or $side == "right" {
-          @if length($values) < $value-index {
-            @error "Not enough values provided for '#{$side}' side.";
-          }
+        } @else if index("top" "bottom" "left" "right", $side) {
           #{$type}-#{$side}: nth($values, $value-index);
-          $value-index: $value-index + 1;
         } @else {
-          @error "Invalid side: #{$side}. Use 'top', 'bottom', 'left', 'right', 'x', or 'y'.";
+          @error "Invalid side: #{$side}. Use 'top', 'bottom', 'left', 'right', 'x', 'y', or 'all'.";
         }
+
+        $value-index: $value-index + 1;
       }
     } @else {
       @error "Invalid type: #{$type}. Use 'margin' or 'padding'.";
@@ -298,13 +293,19 @@ $breakpoints: (
   }
 }
 
+@mixin image-fit($fit: cover, $position: center) {
+  object-fit: $fit;
+  object-position: $position;
+}
+
 @mixin button($type) {
   @extend %simple-transition;
-  background-color: color("white");
-  @include border(all, 1px, solid, color($type));
-  font-size: 18px;
+  @if $type != "slider" {
+    background-color: transparent;
+    @include border(all, 1px, solid, color($type));
+  }
   @if $type == "green" {
-    color: color("green");
+    @extend %green-button-text;
 
     &:hover {
       background-color: color("green");
@@ -317,7 +318,7 @@ $breakpoints: (
       border-color: color("dark-green");
     }
   } @else if $type == "yellow" {
-    color: color("yellow");
+    @extend %yellow-button-text;
 
     &:hover {
       background-color: color("yellow");
@@ -329,9 +330,20 @@ $breakpoints: (
       color: color("white");
       border-color: color("dark-yellow");
     }
-  }
-  @include respond-to(big-tablet) {
-    font-size: 20px;
+  } @else if $type == "slider" {
+    @extend %slider-button-text;
+    background-color: color("light-green");
+    border-radius: 20px;
+    @include spacing("padding", (x, y), 20px, 10px);
+
+    &:hover {
+      background-color: color("green");
+      color: color("white");
+    }
+
+    &:active {
+      background-color: color("dark-green");
+    }
   }
 }
 
@@ -462,7 +474,7 @@ $breakpoints: (
   position: relative;
 }
 
-%icon-btn {
+%icon-button {
   @extend %simple-transition;
   color: color("black");
   &:hover {
